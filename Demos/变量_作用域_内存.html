@@ -12,6 +12,46 @@
             return arguments[0]+arguments[1];
         }
         console.log(typeof(add));
+        if(true){
+            var color="blue";
+        }
+        alert(color);
+        for(var i=0;i<10;i++){
+            add(i);
+        }
+        alert(i);
+        //测试引用传递还是值传递
+        function Copy(obj){
+            obj.Name="Hello";
+            obj=new Object();
+            obj.Name="HelloAgain";
+        }
+        var person=new Object();
+        Copy(person);
+        console.log(person.Name);
+        //循环引用
+        function problem(){
+            var objA=new Object();
+            var objB=new Object();
+            objA.someOtherObj=objB;
+            objB.anotherObj=objA;
+        }
+        //对象字面量
+        function displayInfo(obj){
+            var output="";
+            if(typeof obj.Name=="string")
+            output+="Name:"+obj.Name+"\n";
+            if(typeof obj.age=="number")
+                output+="Age:"+obj.age+"\n";
+                alert(output);
+        }
+        displayInfo({
+            Name:"Hello",
+            age:1
+        })
+        displayInfo({
+            Name:"hello"
+        })
     </script>
 </body>
 </html>
