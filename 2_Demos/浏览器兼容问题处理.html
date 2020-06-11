@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>浏览器兼容性常见处理</title>
+</head>
+<body>
+    1.IE条件注释
+    <!--[if IE 6]>    
+    This content is actually inside an HTML comment.
+    It will only be displayed in IE6
+    <![endif]-->
+
+    <!--[if lte IE 7]>
+    This content will only be displayed by IE5,6,7 and earlier.
+    lte stands for "less than or equal"
+    <![endif]-->
+
+    <!--[if !IE]><-->
+    <!--IE浏览器显示了？？-->
+    This is normal Html content,but IE will not display it because of the 
+    comment above and the comment below.
+    <!-- ><![endif]-->
+    This is normal content,displayed by all browers.
+    <script>
+    /*@cc_on
+    @if(@_jscript){
+        alert('you are using IE');
+    }
+    @else*/
+    alert("not IE");
+    /*@end
+    @*/
+    </script>
+</body>
+</html>

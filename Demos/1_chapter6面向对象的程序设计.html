@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript高级程序设计-面向对象的程序设计</title>
+</head>
+<body>
+    <script>
+        /*
+         var person={
+             name:"Nicholas",
+             age:29,
+             job:"Software Engineer",
+             sayName:function(){
+                 console.log(this.name);
+             }
+         };
+         person.sayName();
+  
+         var person={};
+         Object.defineProperty(person,"name",{
+             writable:false,
+             value:"msl"
+         });
+         console.log(person.name);
+         person.name="hhhh";
+         console.log(person.name);
+         Object.defineProperty(person,"name",{
+             writable:true,
+         });
+          
+        var book={
+            _year:2004,
+            edition:1
+        };
+        
+        Object.defineProperty(book,"year",{
+            get:function(){
+                return this._year;
+            },
+            set:function(newvalue){
+                if(newvalue>2004)
+                {
+                    this._year=newvalue;
+                    this.edition+=newvalue-2004;
+                }
+            }
+        });
+        console.log(book._year);
+        book.year=2005;
+        console.log(book.edition);
+     
+       var book={};
+       Object.defineProperties(book,{
+           _year:{
+               writable:true,
+               value:2004
+           },
+           edition:{
+               writable:true,
+               value:1
+           },
+           year:{
+               get:function(){
+                    return this._year;
+               },
+               set:function(newvalue){
+                   if(newvalue>2004){
+                       this._year=newvalue;
+                       this.edition=newvalue-2004;
+                   }
+               }
+           }
+       });     
+       var descriptor=Object.getOwnPropertyDescriptor(book,"_year");
+       console.log(descriptor.value);
+       console.log(descriptor.configurable);
+       console.log(typeof descriptor.get);
+       var descript=Object.getOwnPropertyDescriptor(book,"year");
+       console.log(descript.value);
+       console.log(descript.enumerable);
+       console.log(typeof descript.get);
+         */
+         //创建同一类型的对象-工厂模式
+         /*
+         function createPerson(name,age,job){
+             var o=new Object();
+             o.name=name;
+             o.age=age;
+             o.job=job;
+             o.sayName=function(){
+                 console.log(this.name);
+             }
+             return o;
+         }
+         var person1=createPerson("msl",29,"Software Engineer");
+         var person2=createPerson("zzy",29,"Police");
+        person1.sayName();
+        person2.sayName();
+        */
+        /*
+        function Person(name,age,job)
+        {
+            this.name=name;
+            this.age=age;
+            this.job=job;
+           /* this.sayName=function(){
+                console.log(this.name);
+            }
+            
+            this.sayName=sayName;
+        }
+        var person1=new Person("msl",29,"Software Engineer");
+        var person2=new Person("zzy",29,"Police");
+        /*
+        person1.sayName();
+        person2.sayName();
+        console.log(person1.sayName==person2.sayName);
+        
+        function sayName(){
+            console.log(this.name);
+        }
+       sayName();
+       person1.sayName();
+       person2.sayName();
+       console.log(person1.sayName==person2.sayName);
+       */
+       //原型函数
+    /*
+       function Person(){}
+       Person.prototype.name="msl";
+       Person.prototype.age=29;
+       Person.prototype.job="Software Engineer";
+       Person.prototype.sayName=function(){
+           console.log(this.name);
+       };
+      var person1=new Person();
+      //person1.sayName();
+      var person2=new Person();
+      person1.name="Greg";
+      var keys=Object.keys(Person.prototype);
+      console.log(keys);
+      var p1keys=Object.keys(person1);
+      console.log(p1keys);
+      var allkeys=Object.getOwnPropertyNames(Person.prototype);
+      console.log(allkeys);
+      
+      console.log(person1.hasOwnProperty("name"));
+      console.log("name" in person1);
+      console.log("name" in Person);
+      person1.name="Greg";
+      console.log(person1.name);
+      console.log(person1.hasOwnProperty("name"));
+      console.log(person2.name);
+      delete person1.name;
+      console.log(person1.name);
+     
+      function hasPrototypeProperty(object,name){
+          return !object.hasOwnProperty(name) && (name in object);
+      }
+      //console.log(hasPrototypeProperty(person1,"name"));
+      //console.log(hasPrototypeProperty(person2,"name"));
+      for(var prop in person1){
+          console.log(prop);
+      }
+       */
+      //person2.sayName();
+      /*
+      console.log(person1.sayName==person2.sayName);
+      console.log(Object.getPrototypeOf(person1)==Person.prototype);
+      console.log(Object.getPrototypeOf(person1).name);
+      console.log(Object.getPrototypeOf(person1).constructor)
+     
+    var o={
+        ToString:function(){
+            return "my object";
+        }
+    }
+    for(var prop in o){
+        if(prop=="ToString"){
+            console.log("Found toString");
+        }
+    }
+    */
+    /*
+    function Person(){
+    }
+    Person.prototype={
+        name:"msl",
+        age:29,
+        job:"Software Engineer",
+        sayName:function(){
+            console.log(this.name);
+        }
+    };
+    Object.defineProperty(Person.prototype,"constructor",{
+        enumerable:false,
+        value:Person,
+    });
+    var friend=new Person();
+    console.log(friend instanceof Person);
+    console.log(friend instanceof Object);
+    console.log(friend.constructor==Person);
+    console.log(friend.constructor==Object);
+    Person.prototype.sayHi=function(){
+        console.log("Hi");
+    }
+    friend.sayHi();
+    */
+    /*
+    function Person(){
+
+    }
+    var friend=new Person();
+    Person.prototype={
+        constructor:Person,
+        name:"msl",
+        age:29,
+        job:"software engineer",
+        sayName:function(){
+            console.log(this.name);
+        }
+    }
+friend.sayName();
+*/
+//根据原型，扩展已有类属性（类比扩展属性）
+/*
+String.prototype.startsWith=function(text){
+    return this.indexOf(text)==0;
+}
+var msg="Hello world!";
+console.log(msg.startsWith("Hello"));
+*/
+//原型模式引用类型属性共享导致的更改
+/*
+function Person(){}
+Person.prototype={
+    constructor:Person,
+    name:"msl",
+    age:29,
+    job:"software engineer",
+    friends:["haha","xixi"],
+    sayName: function(){
+        console.log(this.name);
+    }
+}
+var person1=new Person();
+var person2=new Person();
+person1.friends.push("gege");
+console.log(person1.friends);
+console.log(person2.friends);
+*/
+//构造模式+原型模式
+/*
+function Person(name,age,job){
+    this.name=name,
+    this.age=age;
+    this.job=job;
+    this.friends=["haha","xixi"];
+}
+Person.prototype={
+    constructor:Person,
+    sayName:function(){
+        console.log(this.name);
+    }
+}
+var person1 =new Person("msl",29,"software engineer");
+var person2=new Person("zzy",29,"Police");
+person1.sayName();
+person2.sayName();
+person1.friends.push("huanghuang");
+console.log(person1.friends);
+console.log(person2.friends);
+*/
+/*
+function Person(name,age,job){
+    this.name=name;
+    this.age=age;
+    this.job=job;
+    if(typeof this.sayName!="function"){
+        Person.prototype.sayName=function(){
+            console.log(this.name);
+        }
+    }
+   
+}
+var person1=new Person("msl",29,"software engineer");
+var person2=new Person("zzy",29,"Police");
+person1.sayName();
+person2.sayName();
+*/
+//寄生构造函数,和工厂模式没有区别，返回创建的对象
+/*
+function Person(name,age,job){
+    var o=new Object();
+    o.name=name;
+    o.age=age;
+    o.job=job;
+    o.sayName=function(){
+        console.log(this.name);
+    };
+    return o;
+}
+var friend=new Person("Nicholas",29,"Software Engineer");
+friend.sayName();
+function SpecialArray(){
+    var values=new Array();
+    values.push.apply(values,arguments);
+    values.toPipedString=function(){
+        return this.join("|");
+    };
+    return values;
+}
+var colors=new SpecialArray("red","blue","green");
+console.log(colors.toPipedString());
+*/
+//稳妥构造函数模式,不可以通过属性访问，只可以通过函数访问，只读不写
+/*
+function Person(name,age,job){
+    var o=new Object();
+    o.getName=function(){
+        return name;
+        //如果是return this.name，返回undefined，因为person没有name属性，person
+        //调用,this指向person，所以返回undefined;
+    }
+    return o;
+}
+var person1=new Person("msl",29,"Software Engineer");
+console.log(person1.getName());
+console.log(name);
+*/
+//原型链的基本模式
+/*
+function SuperType(){
+    this.property=true;
+}
+SuperType.prototype.getSuperValue=function(){
+    return this.property;
+};
+function SubType(){
+    this.subproperty=false;
+}
+SubType.prototype=new SuperType();
+SubType.prototype.getSubValue=function(){
+    return this.subproperty;
+}
+
+var instance=new SubType();
+console.log(instance.getSuperValue());
+console.log(instance instanceof Object);
+console.log(instance instanceof SuperType);
+console.log(instance instanceof SubType);
+
+SubType.prototype.getSuperValue=function(){
+    return false;
+}
+var instance =new SubType();
+console.log(instance.getSuperValue());
+var superType=new SuperType();
+console.log(superType.getSuperValue());
+instance.property=false;
+console.log(instance.property);
+console.log(superType.property);
+*/
+//构造函数继承调用父类的call方法,解决原型链中引用对象的共享问题
+/*
+function SuperType(){
+    this.colors=["red","blue","yellow"];
+}
+function SubType(){
+    SuperType.call(this);
+}
+var instance1=new SubType();
+instance1.colors.push("black");
+console.log(instance1.colors);
+var instance2=new SubType();
+console.log(instance2.colors);
+console.log(instance1 instanceof SuperType);
+*/
+//构造函数实现传递传递
+/*
+function SuperType(name){
+    this.name=name;
+}
+function SubType(){
+    SuperType.call(this,"Nicholas");
+    this.age=29;
+}
+var instance=new SubType();
+console.log(instance.name);
+console.log(instance.age);
+*/
+//组合继承原型定义函数复用
+/*
+function SuperType(name){
+    this.name=name;
+    this.colors=["red","blue","green"];
+}
+SuperType.prototype.sayName=function(){
+    console.log(this.name);
+}
+function SubType(name,age){
+    SuperType.call(this,name);
+    this.age=age;
+}
+//原型指向SuperType,原型构造函数指向SubType
+SubType.prototype=new SuperType();
+SubType.prototype.constructor=SubType();
+SubType.prototype.sayAge=function(){
+    console.log(this.age);
+}
+var instance1=new SubType("Nicholas",29);
+instance1.colors.push("black");
+console.log(instance1.colors);
+instance1.sayName();
+instance1.sayAge();
+//创建Object对象的原型式继承
+//寄生式继承-引用类型变量实例共享
+var person={
+    name:"msl",
+    firends:["zzy","xck"]
+};
+
+var anotherPerson=Object(person);
+anotherPerson.name="zzy";
+anotherPerson.firends.push("haha");
+var yetAnotherPerson=Object(person);
+yetAnotherPerson.name="xxk";
+yetAnotherPerson.firends.push("xixi");
+console.log(person.firends);
+
+var anotherPerson=Object.create(person);
+anotherPerson.name="Greg";
+anotherPerson.firends.push("Rob");
+var yetAnotherPerson=Object.create(person);
+yetAnotherPerson.name="Linda";
+yetAnotherPerson.firends.push("Baby");
+console.log(person.firends);
+
+
+function createAnother(original){
+    var clone=Object(original);
+    clone.sayHi=function(){
+        console.log("Hi");
+    }
+    return clone;
+}
+var person={
+    name:"msl",
+    friends:["huahua","xixi"]
+}
+var anotherPerson=createAnother(person);
+anotherPerson.sayHi();
+*/
+//寄生组合式继承
+function inheritPrototype(subType,superType){
+    var prototype=Object(superType.prototype);
+    prototype.constructor=subType;
+    subType.prototype=protype;
+}
+    </script>
+</body>
+</html>

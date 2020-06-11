@@ -264,7 +264,120 @@ var objGetColor=getColor.bind(o);
 objGetColor();
 */
 //基本类型的装箱操作
+/*
+var falseObject=new Boolean(false);
+console.log(falseObject&&true);
+var falseValue=false;
+console.log(falseValue);
+console.log(typeof falseObject);
+console.log(typeof falseValue);
+console.log(falseObject instanceof Boolean);
+console.log(falseValue instanceof Boolean);
 
-    </script>
+var stringVal="hello world";
+console.log(stringVal.length);
+console.log(stringVal.charAt(1));
+console.log(stringVal.charCodeAt(1));
+var str="我爱中国";
+console.log(str.length);
+console.log(str.charAt(1));
+console.log(str.charCodeAt(1));
+str=str.concat(stringVal);
+console.log(str);
+console.log(stringVal.indexOf("o"));
+console.log(stringVal.lastIndexOf("o"));
+
+var text="cat,bat,sat,fat";
+var pattern=/.at/g;
+var matches=text.match(pattern);
+console.log(matches);
+var matches1=pattern.exec(text);
+console.log(matches1);
+console.log(text.search(/.at/));
+console.log(text.replace("at","ond"));
+console.log(text.replace(/.at/g,"ond"));
+
+function htmlEscape(text){
+    return text.replace(/[<>"&]/g,function(match,pos,originalText){
+        switch(match){
+            case "<":
+                return "&lt;";
+            case ">":
+                return "&gt;";
+            case "&":
+                return "&amp;";
+            case "\"":
+                return "&quot;";
+            
+        }
+    });
+}
+var text="Hello,girl,you > are & a best < one \"";
+console.log(htmlEscape(text));
+
+var colorText="red,blue,green,yellow";
+console.log(colorText.split(","));
+console.log(colorText.split(",",2));
+console.log(colorText.split(/[^\,]+/));
+console.log(colorText.split(/[\,]+/));
+console.log(colorText.split(/[\,]/));
+
+var stringValue="yellow";
+console.log(stringValue.localeCompare("brick"));
+console.log(stringValue.localeCompare("yellow"));
+console.log(stringValue.localeCompare("zoo"));
+function determinOrder(vaule){
+    var result=stringValue.localeCompare(vaule);
+    if(result<0){
+        console.log("The string 'yellow' comes before the string '"+vaule+"'.");
+    }else if(result>0){
+        console.log("The string 'yellow' comes after the string '"+vaule+"'.");
+    }else{
+        console.log("The string 'yellow' is equal to the string '"+vaule+"'.");
+    }
+}
+determinOrder("brick");
+determinOrder("yellow");
+determinOrder("zoo");
+
+console.log(String.fromCharCode(104,101,108,108,111));
+
+var uri="http://www.wrox.com/illegal value.htm#start";
+console.log(encodeURI(uri));
+console.log(encodeURIComponent(uri));
+var encodeUri=encodeURIComponent(uri);
+console.log(decodeURI(encodeUri));
+console.log(decodeURIComponent(encodeUri));
+
+eval("function sayHi() {console.log('Hi')}");
+sayHi();
+
+var global=function(){
+    return this;
+}
+console.log(global==window);
+
+console.log(Math.E);
+console.log(Math.LN10);
+console.log(Math.LN2);
+console.log(Math.LOG10E);
+console.log(Math.PI);
+console.log(Math.SQRT1_2);
+console.log(Math.SQRT2);
+
+var values=[1,2,3,4,5,6,7,8,9];
+console.log(Math.max(1,2,3,4,5,6,7,8,9));
+//console.log(Math.max(values));
+console.log(Math.max.apply(Math,values));
+*/
+function selectFrom(lowerValue,upperValue){
+    var choices=upperValue-lowerValue+1;
+    return Math.floor(Math.random()*choices+lowerValue);
+}
+var num=selectFrom(2,10);
+console.log(num);
+var colors=["red","green","blue","yellow","black","purple","brown"];
+console.log(colors[selectFrom(0,colors.length-1)]);
+</script>
 </body>
 </html>
