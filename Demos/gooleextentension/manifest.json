@@ -1,0 +1,25 @@
+{
+    "manifest_version":2,
+    "name":"Msl's First Extension",
+    "version":"1.0",
+    "description":"The first extension that msl made",
+    "brower_action":{
+        "default_icon":"msl.png",
+        "default_title":"Hello MSL",
+        "default_popup":"popup.html" 
+    },
+    "permissions":[
+        "http://*/",
+        "bookmarks",
+        "tabs",
+        "history"
+    ],
+    "background":{
+        "page":"background.html"
+    },
+    "content_scripts":[{
+        "mathes":["http://*/*","https://*/*"],
+        "js":["js/jquery-1.9.1.min.js","js/js.js"],
+        "run_at":"document_start"
+    }]
+}
