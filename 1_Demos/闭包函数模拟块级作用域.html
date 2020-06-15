@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS没有{}块级作用域,只有函数的作用域链</title>
+</head>
+<body>
+    <script>
+       function print(count)
+       {
+           for(var i=0;i<count;i++){
+               console.log(i);
+           }
+           console.log(i);
+       }
+       print(5);
+       function print1(count){
+           for(var i=0;i<count;i++){
+               console.log(i);
+           }
+           var i;
+           console.log(i);
+       }
+       print1(5);
+       function print2(count){
+           (function(){
+               for(var i=0;i<count;i++){
+                   console.log(i);
+               }
+           })();
+           console.log(i);
+
+       }
+      // print2();
+       function print3(count){
+           var a=function(){
+               for(var i=0;i<count;i++)
+               {
+                   console.log(i);
+               }
+           }();
+           console.log(i);
+       }
+      // print3();
+    </script>
+</body>
+</html>

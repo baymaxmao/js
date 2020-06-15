@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包只能取得包含函数中任何变量的最后一个值</title>
+</head>
+<body>
+    <script>
+        function createFuntion(){
+            var result=new Array();
+            for(var i=0;i<10;i++){
+                result[i]=function(){
+                    return i;
+                }
+            }
+            return result;
+        }
+        function createanotherFunction(){
+            var result=new Array();
+            for(var i=0;i<10;i++){
+                result[i]=function(num){
+                    return function(){
+                        return num;
+                    };
+                }(i);
+            }
+            return result;
+        }
+        function createTestFunction(){
+            var result=new Array();
+            for(var i=0;i<10;i++){
+                result[i]=function(num){
+                    return num;
+                }(i);
+            }
+            return result;
+        }
+        var result=createFuntion();
+        console.log(result);
+        var result1=createanotherFunction();
+        console.log(result1);
+        var result3=createTestFunction();
+        console.log(result3);
+    </script>
+</body>
+</html>

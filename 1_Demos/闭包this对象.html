@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包中的this对象-全局性</title>
+</head>
+<body>
+    <script>
+        var name="The Window";
+        var object={
+            name:"My Object",
+            getNameFunc:function(){
+                return function(){
+                    return this.name;
+                }
+            }
+        }
+        var object1={
+            name:"My Object",
+            getNameFunc:function(){
+                var that=this;
+                return function(){
+                    return that.name;
+                }
+            }
+        }
+        var object2={
+            name:"My Object",
+            getNameFunc:function(){
+                return this.name;
+            }
+        }
+        console.log(object2.getNameFunc());
+        console.log((object2.getNameFunc)());
+        console.log((object2.getNameFunc=object2.getNameFunc)());
+        console.log(object.getNameFunc()());
+        console.log(object1.getNameFunc()());
+    </script>
+</body>
+</html>

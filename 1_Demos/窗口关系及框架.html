@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <title>frames</title>
+</head>
+哈哈哈哈哈
+<!--
+<frameset rows="160,*">
+    <frame src="",name="topFrame">
+    <frameset cols="50%,50%">
+            <frame src="",name="leftFrame">
+            <frame src="",name="rightFrame">
+    </frameset>
+    </frame>
+</frameset>
+-->
+<script>
+   var leftPos=(typeof window.screenLeft =="number")?window.screenLeft:window.screenX;
+   var topPos=(typeof window.screenTop=="number")?window.screenTop:window.screenY;
+   console.log(leftPos);
+   console.log(topPos);
+   //window.moveTo(0,0);
+   //window.moveBy(0,100);
+   window.moveTo(200,300);
+   window.moveBy(-50,0);
+</script>
+</html>
