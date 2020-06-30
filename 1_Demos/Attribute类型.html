@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Attribute类型</title>
+</head>
+<body>
+    <div id="test" style="width:100px">测试</div>
+    <script>
+        var element=document.getElementById("test");
+        var attr=document.createAttribute("align");
+        attr.value="center";
+        element.setAttributeNode(attr);
+        console.log(element.attributes["align"].value);
+        console.log(element.getAttributeNode("align").value);
+        console.log(element.getAttribute("align"));
+    </script>
+</body>
+</html>

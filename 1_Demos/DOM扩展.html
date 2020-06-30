@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=8">
+    <title>DOM扩展</title>
+</head>
+<body>
+    2020-06-22 13:40:00
+    <div >
+          哈哈哈哈哈
+            <ul>
+                <li class="gym">跳舞</li>
+                <li class="gym">打球</li>
+                <li class="gym">游泳</li>
+            </ul>
+            <select>
+                <option name="selected">西瓜</option>
+                <option name="selected">香蕉</option>
+                <option name="selected">甘蔗</option>
+            </select>
+        </div>
+        <div id="content">
+                <P>This is a <strong>paragraph</strong>with alist following it .</P>
+                <ul>
+                    <li>Item1</li>
+                    <li>Item2</li>
+                    <li>Item3</li>
+                </ul>
+        
+        </div>
+        <div >
+                <P>This is a <strong>paragraph</strong>with alist following it .</P>
+                <ul>
+                    <li>Item1</li>
+                    <li>Item2</li>
+                    <li>Item3</li>
+                </ul>
+        
+        </div>
+        <div >
+                <P>This is a <strong>paragraph</strong>with alist following it .</P>
+                <ul>
+                    <li>Item1</li>
+                    <li>Item2</li>
+                    <li>Item3</li>
+                </ul>
+        
+        </div>
+        <div >
+                <P>This is a <strong>paragraph</strong>with alist following it .</P>
+                <ul>
+                    <li>Item1</li>
+                    <li>Item2</li>
+                    <li>Item3</li>
+                </ul>
+        
+        </div>
+        <div >
+                <P>This is a <strong>paragraph</strong>with alist following it .</P>
+                <ul>
+                    <li>Item1</li>
+                    <li>Item2</li>
+                    <li>Item3</li>
+                </ul>
+        
+        </div>
+    <div id="myDiv">
+        嘿嘿嘿
+        <ul>
+            <li class="gym">跳舞</li>
+            <li class="gym">打球</li>
+            <li class="gym">游泳</li>
+        </ul>
+        <select>
+            <option name="selected">西瓜</option>
+            <option name="selected">香蕉</option>
+            <option name="selected">甘蔗</option>
+        </select>
+    </div>
+    <div class="bd user disabled" id="multiclass">
+    </div>
+    <div id="anotherDiv" data-appId="12345" data-appName="liaoliao">
+    </div>
+    
+    <button id="test">测试</button>
+    <script>
+    window.resizeTo(100,100);
+    var body=document.querySelector("body");
+    var myDiv=document.querySelector("#myDiv");
+    console.log(myDiv.innerText);
+    var text="Hello & welcome, <b>\"reader\"</b>";
+    //console.log(myDiv.innerText);
+    console.log(getInnerText(myDiv));
+   // setInnerText(myDiv,text);
+    myDiv.innerText=myDiv.innerText;
+   // myDiv.outerText="Hello,World";
+    myDiv.scrollIntoView();
+    
+    //alert(document.documentElement.contains(document.body));
+    /*
+    console.log(myDiv.innerHTML);
+    console.log(myDiv.outerHTML);
+
+    myDiv.insertAdjacentHTML("beforebegin","<p>Hello world!</p>");
+    myDiv.insertAdjacentHTML("afterbegin","<p>Hello world!</p>");
+    var mode=document.documentMode;
+    console.log(mode);
+    console.log(myDiv.children[0].innerHTML);
+    console.log(myDiv.childNodes[0].innerHTML);
+    //myDiv.outerHTML="<p>This is a paragraph.</p>";
+
+    //myDiv.innerHTML="Hello & world,<b>\"reader\"</b>";
+    myDiv.innerHTML="<input type=\"hidden\"><script>console.log('Hi');<\/script>";
+    myDiv.innerHTML="<style type=\"text/css\">body{background-color:red;}</style>";
+    var text="<a href=\"#\" onclick=\"alert('hi')\">Click Me</a>";
+    var sanitized=window.toStaticHTML(text);
+    alert(sanitized);
+    myDiv.innerHTML=text;
+    var gym=document.querySelector(".gym");
+    console.log(gym.innerHTML);
+    var gyms=document.querySelectorAll(".gym");
+    for(i=0,len=gyms.length;i<len;i++){
+       console.log(gyms[i].innerHTML);
+    }
+ 
+    var gyms=document.getElementById("myDiv").getElementsByClassName("gym");
+    var div=document.getElementById("multiclass");
+    var classNames=div.className.split(/\s+/);
+    var pos=-1,i,len;
+    for(i=0,len=classNames.length;i<len;i++){
+        if(classNames[i]=="user"){
+            pos=i;
+            break;
+        }
+    }
+    classNames.splice(pos,1);
+    div.className=classNames.join(" ");
+    */
+    var gyms=document.getElementById("multiclass");
+    gyms.classList.remove("user");
+    gyms.classList.add("hello");
+    gyms.classList.toggle("world");
+    gyms.classList.toggle("disabled");
+    var button=document.getElementById("test");
+    button.focus();
+    console.log(button===document.activeElement);
+    console.log(document.charset);
+    document.charset="UTF-16";
+    console.log(document.defaultCharset);
+    //document.charset="UTF-8";
+    var anotherDiv=document.getElementById("anotherDiv");
+    var appId=anotherDiv.dataset.appId;
+    var myName=anotherDiv.dataset.appName;
+    console.log(appId);
+    console.log(myName);
+    anotherDiv.dataset.appName="msl";
+
+    //判断是否包含
+    function matchesSelector(element,selector){
+        var ret=null;
+        do{
+            if(element.matchesSelector){
+                ret=element.matchesSelector(selector);
+                break;
+            }
+            if(element.msMatchesSelector){
+                ret=element.msMatchesSelector(selector);
+                break;
+            }
+            if(element.mozMatchsSelector){
+                ret=element.mozMatchsSelector(selector);
+                break;
+            }
+            if(element.webkitMatchesSelector){
+                ret=element.webkitMatchesSelector(selector);
+                break;
+            }
+            throw new Error("Not Supported.");
+        }while(false);
+        return ret;
+    }
+    //元素遍历
+    function ScanAll(element){
+        var child=element.firstChild;
+        while(child!=element.lastChild){
+            if(child.nodeType==1){
+                /****/
+            }
+            child=child.nextSibling;
+        }
+    }
+    function ScanElementAll(element){
+        var child=element.firstElementChild;
+        while(child!=element.lastElementChild){
+            /****/
+            child=child.netElementsSibling;
+        }
+    }
+    function contains(refNode,otherNode){
+        if(typeof refNode.contains=="function" ){
+
+        }
+    }
+    function getInnerText(element){
+        return(typeof element.textContent=="String")?
+            element.textContent:element.innerText;
+        
+    }
+    function setInnerText(element,text){
+        if(typeof element.textContent=="String"){
+            element.textContent=text;
+        }
+        else{
+            element.innerText=text;
+        }
+    }
+    </script>
+</body>
+</html>

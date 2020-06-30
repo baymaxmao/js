@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件类型-键盘与文本事件</title>
+</head>
+<body>
+    <input type="text"  id="myText"/>
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <script>
+        window.onload=function(event){
+            var list=document.getElementById("myList");
+            /*
+            //移除元素
+            //4
+            document.addEventListener("DOMSubtreeModified",function(event){
+                alert(event.type);
+                alert(event.target);
+            });
+            //2
+            //DOMNodeRemovedFromDocument不会向上冒泡，所以document无法响应这个事件
+            list.addEventListener("DOMNodeRemovedFromDocument",function(event){
+                alert(event.type);
+                alert(event.target);
+            });
+            //1
+            document.addEventListener("DOMNodeRemoved",function(event){
+                alert(event.type);
+                alert(event.target);
+                alert(event.relatedNode);
+            });
+            //3
+            list.firstChild.addEventListener("DOMNodeRemovedFromDocument",function(event){
+                alert(event.type);
+                alert(event.target);
+            });
+            list.parentNode.removeChild(list);
+            */
+            //添加元素
+            var li=document.createElement("li");
+            li.appendChild(document.createTextNode("Item 4"));
+            document.addEventListener("DOMSubtreeModified",function(event){
+                alert(event.type);
+                alert(event.target);
+            });
+            document.addEventListener("DOMNodeInserted",function(event){
+                alert(event.type);
+                alert(event.target);
+                alert(event.relatedNode);
+            });
+            li.addEventListener("DOMNodeInsertedIntoDocument",function(event){
+                alert(event.type);
+                alert(event.target);
+            });
+            list.appendChild(li);
+        };
+        var EventUtil={
+            getCharCode:function(event){
+                if(typeof event.charCode== "number" ){
+                    return event.charCode;
+                }
+                else{
+                    return event.keyCode;
+                }
+            }
+        };
+        var text=document.getElementById("myText");
+        text.addEventListener("keypress",function(event){
+            alert(event.charCode);
+        })
+        var isSupported=document.implementation.hasFeature("CompositionEvent","3.0");
+        var isCESupported=document.implementation.hasFeature("MutationEvent","2.0");
+       // alert(isSupported);
+       alert(isCESupported);
+        text.addEventListener("compositionstart",function(){
+            alert(event.data);
+        },false);
+        /*
+        text.addEventListener("textInput",function(event){
+             alert(event.data);
+           // alert(event.inputMethod);
+        },false);
+    
+        text.onkeypress=function(event){
+            //alert(event.keyCode); 
+            alert(EventUtil.getCharCode(event));
+        }
+        */
+    </script>
+</body>
+</html>

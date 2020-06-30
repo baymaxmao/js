@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM操作</title>
+</head>
+<body>
+    <!--表格-->
+    <table border="1" width="100%">
+        <tbody>
+            <tr>
+                <td>Cell1,1</td>
+                <td>Cell1,2</td>
+            </tr>
+            <tr>
+                <td>Cell2,1</td>
+                <td>Cell2,2</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        //动态脚本
+        function loadScript(url){
+            var script=document.createElement("script");
+            script.type="text/javascript";
+            script.src=url;
+            document.body.appendChild(script);
+        }
+        //动态样式
+        function loadstyle(url)
+        {
+            var link=document.createElement("link");
+            link.rel="stylesheet";
+            link.type="text/css";
+            link.href=url;
+            var head=document.getElementsByTagName("head")[0];
+            head.appendCh
+            ild(link);
+        }
+        //操作表格
+        var table=document.createElement("table");
+        table.border=1;
+        table.width="100%";
+
+        var tablebody=document.createElement("tbody");
+        table.appendChild(tablebody);
+
+        var row1=document.createElement("tr");
+        var td1=document.createElement("td");
+        var text11=document.createTextNode("Cell1,1");
+        td1.appendChild(text11);
+        var td2=document.createElement("td");
+        var text12=document.createTextNode("Cell1,2");
+        td2.appendChild(text12);
+        row1.appendChild(td1);
+        row1.appendChild(td2);
+        tablebody.appendChild(row1);
+
+        var row2=document.createElement("tr");
+        var td21=document.createElement("td");
+        var text21=document.createTextNode("Cell2,1");
+        td21.appendChild(text21);
+        var td22=document.createElement("td");
+        var text22=document.createTextNode("cell2,2");
+        td22.appendChild(text22);
+        row2.appendChild(td21);
+        row2.appendChild(td22);
+        tablebody.appendChild(row2);
+
+        document.body.appendChild(table);
+
+        var table2=document.createElement("table");
+        table2.border=1;
+        table2.width="100%";
+
+        var tablebody2=document.createElement("tbody");
+        table.appendChild(tablebody2);
+
+        tablebody2.insertRow(0);
+        tablebody2.rows[0].insertCell(0);
+        tablebody2.rows[0].cells[0].appendChild(document.createTextNode("Cell1,1"));
+        tablebody2.rows[0].insertCell(1);
+        tablebody2.rows[0].cells[1].appendChild(document.createTextNode("Cell1,2"));
+
+        tablebody2.insertRow(1);
+        tablebody2.rows[1].insertCell(0);
+        tablebody2.rows[1].cells[0].appendChild(document.createTextNode("Cell2,1"));
+        tablebody2.rows[1].insertCell(1);
+        tablebody2.rows[1].cells[1].appendChild(document.createTextNode("Cell2,2"));
+
+        document.body.appendChild(table2);
+
+
+    </script>
+</body>
+</html>

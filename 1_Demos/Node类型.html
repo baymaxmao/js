@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Node类型</title>
+</head>
+<body>
+    <div id="source">
+    <p id="test">测试Node类型</p> 
+    <a href="#">同胞节点1</a>
+    <span id="span">同胞节点2</span>
+    </div>
+</body>
+    <script>
+    var div=document.getElementById("source");
+    var p=document.getElementById("test");
+    var span=document.getElementById("span");
+    var node=document.createElement("span");
+    var textnode=document.createTextNode("大傻逼");
+    node.appendChild(textnode);
+    document.normalize();
+    alert(div.firstChild==p);
+    /*
+    var deepDiv=div.cloneNode(true);
+    console.log("深层复制"+deepDiv.childNodes.length);
+    var shadowlist=div.cloneNode();
+    console.log("浅层复制"+shadowlist.childNodes.length);
+    */
+    //var returnNode=div.insertBefore(node,null);
+    //alert(returnNode==div.lastChild);
+ 
+   // var returnNode=div.replaceChild(node,p);
+    //alert(returnNode==div.firstChild);
+   // div.appendChild(p);
+   // div.appendChild(node);
+    //var returanNode=div.insertBefore(node,null);
+   // var returnNode=div.insertBefore(node,p);
+    /*
+    console.log(p.parentNode.nodeName);
+    console.log(p.nextSibling.nodeName);
+    console.log(div.firstChild.nodeName);
+    console.log(div.lastChild.nodeName);
+    console.log(span.previousSibling.nodeName);
+    */
+         /*
+        var body=document.getElementsByTagName("body")[0];
+        var count=body.childNodes.length;
+        for(var i=0;i<count;i++)
+        {
+            console.log(body.childNodes[i].nodeName);
+        }
+        console.log(i);
+       
+        var ele=document.getElementById("test");
+        //在IE浏览器中无效
+        
+        if(ele.nodeType==Node.ELEMENT_NODE)
+        {
+            alert("p is an element");
+        }
+        
+        //使用于所有浏览器数值比较
+        if(ele.nodeType==1){
+           var value=ele.nodeName;
+           alert(value+" is an element");
+        }
+        */
+
+        function convertToArray(nodes){
+            var array=null;
+            try{
+                array=Array.prototype.slice.call(nodes,0);
+            }catch(ex){
+                array=new Array();
+                for(var i=0,len=nodes.length;i<len;i++){
+                    array.push(nodes[i]);
+                }
+            }
+            return array;
+        }
+
+    </script>
+</html>

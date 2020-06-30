@@ -4,7 +4,6 @@
    
     <title>frames</title>
 </head>
-哈哈哈哈哈
 <!--
 <frameset rows="160,*">
     <frame src="",name="topFrame">
@@ -16,6 +15,13 @@
 </frameset>
 -->
 <script>
+      /*
+    var top1=window.open("http://www.baidu.com","top1","height=400,width=400,top=400,left=400,resizable=yes");
+    top1.resizeTo(500,500);
+    top1.moveTo(100,100);
+    console.log(top1.opener==window);
+    top1.opener=null;
+  
    var leftPos=(typeof window.screenLeft =="number")?window.screenLeft:window.screenX;
    var topPos=(typeof window.screenTop=="number")?window.screenTop:window.screenY;
    console.log(leftPos);
@@ -24,5 +30,17 @@
    //window.moveBy(0,100);
    window.moveTo(200,300);
    window.moveBy(-50,0);
+   window.resizeTo(100,100);
+   */
+   var blocked=false;
+   try{
+       var baiduWin=window.open("http://www.baidu.com","_blank");
+        if(baiduWin==null)
+        blocked=true;
+   }catch(ex){
+       blocked=true;
+   }
+   if(blocked)
+   alert("窗口被阻止弹出");
 </script>
 </html>

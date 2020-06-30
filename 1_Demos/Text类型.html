@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text类型</title>
+</head>
+<body>
+    <div id="myDiv">
+        一个人去巴黎
+        <p>找个地方慢慢把你忘记就算寻找旅途的意义</p>
+    </div>
+    <script>
+        var textNode=document.getElementById("myDiv").firstChild;
+        console.log(textNode.nodeValue);
+        var element=document.createElement("div");
+        element.className="mesage";
+        var textNode=document.createTextNode("Hello world");
+        element.appendChild(textNode);
+        /*
+        var anotherNode=document.createTextNode(",msl");
+        element.appendChild(anotherNode);
+        console.log(element.childNodes.length);
+        element.normalize();
+        console.log(element.childNodes.length);
+        */
+        var newNode=element.firstChild.splitText(5);
+        console.log(element.firstChild.nodeValue);
+        console.log(element.childNodes.length);
+        document.body.appendChild(element);
+
+    </script>
+</body>
+</html>

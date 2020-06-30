@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件类型-UI事件，鼠标与滚轮事件</title>
+</head>
+<!--<body onload="alert(event.type)">-->
+<body>
+    <input type="button" onclick="con()" value="测试" id="confirm"/>
+    <div>
+        <ul>
+            <li>嘿嘿嘿</li>
+            <li>哈哈哈</li>
+            <li>嘻嘻嘻</li>
+        </ul>
+    </div>
+    <div style="height:500px" id="myDiv">
+
+    </div>
+    <div>
+        <ul>
+            <li>喜欢你</li>
+            <li>没道理</li>
+            <li>大傻逼</li>
+        </ul>
+    </div>
+   <!-- <img src="test.jpg" onload="alert('loaded')"/>-->
+    <script>
+        var EventUtil={
+            getButton:function(event){
+                if(document.implementation.hasFeature("MouseEvents","2.0")){
+                    return event.button;
+                }
+                else{
+                    switch(event.button){
+                        case 0:
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                        return 0;
+                        case 2:
+                        case 6:
+                        return 2;
+                        case 4:
+                        return 1;
+                    }
+                }
+            },
+            getWheelDelta:function(event){
+                if(event.wheelDelta){
+                    return (client.engine.opera && client.engine.opera<9.5) ? -event.wheelDelta:event.wheelDelta;
+                }else{
+                    return -event.detail*40;
+                }
+            }
+        }
+
+        var myDiv=document.getElementById("myDiv");
+        myDiv.onclick=function(event){
+            alert("Client coordinates:("+event.clientX+","+event.clientY+");Page coordinates:("+event.pageX+","+event.pageY+");Screen coordinates:("+event.screenX+","+event.screenY+")");
+            var keys=new Array();
+            if(event.shiftKey){
+                keys.push("shift");
+            }
+            if(event.ctrlKey){
+                keys.push("ctrl");
+            }
+            if(event.altKey){
+                keys.push("alt");
+            }
+            if(event.metaKey){
+                keys.push("meta");
+            }
+            alert("keys："+keys.join(","));
+        }
+        myDiv.onmousedown=function(event){
+            alert(EventUtil.getButton(event));
+        }
+        var button =document.getElementById("confirm");
+        button.onfocus=function(){
+            button.value="我聚焦了";
+        }
+        button.onblur=function(){
+            button.value="我失焦了";
+        }
+        button.onmouseover=function(event){
+            alert("Moused over from "+event.relatedTarget.tagName+" to "+event.target.tagName);
+        }
+        var isSupported=document.implementation.hasFeature("UIEvent","3.0");
+        console.log(isSupported);
+        window.onload=function(event){
+            var script=document.createElement("script");
+            script.onload=function(event){
+                alert("script loaded");
+                con();
+            };
+            script.type="text/javascript";
+            script.src="example.js";
+            document.body.appendChild(script);
+           var link=document.createElement("link");
+           link.type="text/css";
+           link.rel="stylesheet";
+           link.onload=function(event){
+               alert("css loaded");
+           };
+           link.href="example.css";
+           document.getElementsByTagName("head")[0].appendChild(link);
+            /*
+            var img=document.createElement("img");
+             img.src="test.jpg";
+             document.body.appendChild(img);
+           
+            img.onload=function(event){
+                alert(event.target.src);
+            };
+            
+           */
+        };
+        window.onresize=function(event){
+            alert("Resized");
+        };
+        window.onscroll=function(event){
+            alert(document.body.scrollTop);
+        }
+
+        window.onunload=function(event){
+            alert("Unloaded");
+        }
+        document.onmousewheel=function(event){
+            alert(EventUtil.getWheelDelta(event));
+        }
+        /*
+        document.onmousewheel=function(event){
+            alert(event.wheelDelta);
+        }
+        */
+        //FireFox浏览器
+        /*
+        window.addEventListener("DOMMouseScroll",function(event){
+            alert(event.detail);
+        },false);
+        */
+        /*
+        window.addEventListener("load",function(event){
+            alert(event.type); 
+        });
+        
+        window.onload=function(event){
+            alert(event.type);
+        }
+        */
+    </script>
+</body>
+</html>

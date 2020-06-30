@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件对象event</title>
+</head>
+<body>
+    <input type="button" id="myBtn" value="Click me"/>
+    <input type="button" id="anotherBtn" value="Click me again" />
+    <input type="button" id="noBtn" value="Click noBtn" />
+    <input type="button" id="typeBtn" value="MutiType Event"/>
+    <input type="button" id="IEBtn" value="IEButton" />
+    <a href="http://www.baidu.com" id="myLink">测试取消链接的默认行为</a>
+    <script>
+    var myLink=document.getElementById("myLink");
+    
+    myLink.onclick=function(event){
+        event.preventDefault();
+    }
+    var ieBtn=document.getElementById("IEBtn");
+    ieBtn.onclick=function(){
+        var event=window.event;
+        event.stopPropagation();
+        alert(event.type);
+    }
+    var typeBtn=document.getElementById("typeBtn");
+    var typeHandler=function(event){
+        switch(event.type){
+            case "click":
+            alert("button目标事件"+event.eventPhase);
+             //alert(this.value);
+             //event.stopPropagation();
+             //阻止了传播给body,下面定义了body的onclick事件，不会有弹框出现
+             break;
+            case "mouseover":
+            event.target.style.backgroundColor="red";
+            break;
+            case "mouseout":
+            event.target.style.backgroundColor="";
+            break;
+            
+        }
+    };
+    typeBtn.onclick=typeHandler;
+    typeBtn.onmouseover=typeHandler;
+    typeBtn.onmouseout=typeHandler;
+    document.body.addEventListener("click",function(event){
+        alert("body事件捕获"+event.eventPhase);
+    },true);
+    document.body.onclick=function(event){
+        alert("body事件冒泡"+event.eventPhase);
+        /*
+        alert(event.currentTarget===document.body);
+        alert(this===document.body);
+       // alert(event.target==document.getElementById("myBtn"));
+        alert(event.target==document.getElementById("anotherBtn"));
+       // alert(event.target==document.getElementById("noBtn"));
+       */
+    }
+   
+    var btn=document.getElementById("myBtn");
+    var anotherBtn=document.getElementById("anotherBtn");
+    anotherBtn.addEventListener("click",function(event){
+        alert(event.type);
+        console.log(event.currentTarget.value);
+    },false);
+    btn.onclick=function(event){
+        alert(event.type);
+        console.log(event.currentTarget.value);
+        console.log(event.currentTarget===this);
+        console.log(event.target===this);
+    }
+    </script>
+</body>
+</html>

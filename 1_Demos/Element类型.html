@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Element类型</title>
+</head>
+<body>
+    <div id="myDiv" class="bd" title="Body text" lang="en" dir="ltr" >
+    </div>
+    <div id="anotherDiv" my_attribute="hello"></div>
+    </div>
+    <script>
+        var eleDiv=document.getElementById("myDiv");
+        
+        /*
+        console.log(eleDiv.id);
+        console.log(eleDiv.className);
+        console.log(eleDiv.title);
+        console.log(eleDiv.lang);
+        console.log(eleDiv.dir);
+        var anotherDiv=document.getElementById("anotherDiv");
+        var value=anotherDiv.getAttribute("my_attribute");
+        console.log(value);
+        console.log(anotherDiv.my_attribute);
+       
+        eleDiv.color="red";
+        eleDiv.setAttribute("title","hhhhhh");
+        eleDiv.setAttribute("col",6);
+        console.log(eleDiv.title);
+        console.log(eleDiv.getAttribute("color"));
+        console.log(eleDiv.getAttribute("col"));
+        console.log(eleDiv.col);
+        console.log(eleDiv.color);
+        eleDiv.removeAttribute(color);
+        console.log(eleDiv.color);
+        
+         var id1=eleDiv.attributes.getNamedItem("id").nodeValue;
+         var id2=eleDiv.attributes["id"].nodeValue;
+         console.log(id1);
+         console.log(id2);
+         var attr=eleDiv.attributes.removeNamedItem("title");
+         console.log(eleDiv.title);
+ */
+        //遍历属性
+        function outputAttributes(element){
+            var pairs=new Array();
+           
+            for(var i=0;i<eleDiv.attributes.length;i++){
+               var attrName=eleDiv.attributes[i].nodeName;
+               var attrValue=eleDiv.attributes[i].nodeValue;
+               if(eleDiv.attributes[i].specified){
+                pairs.push(attrName+"=\""+attrValue+"\"");
+               }
+            }
+            return pairs.join(" ");
+        }
+        console.log(outputAttributes(eleDiv));
+    </script>
+</body>
+</html>
